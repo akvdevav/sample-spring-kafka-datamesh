@@ -2,7 +2,7 @@ package pl.piomin.datamesh.transactions.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import pl.piomin.datamesh.transactions.domain.Transaction;
@@ -25,11 +25,9 @@ public class KafkaEventProducer {
             t.setSourceAccountId(r.nextLong(1, 100));
             t.setTargetAccountId(r.nextLong(1, 100));
             t.setAmount(r.nextInt(1, 10000));
-            Message<Transaction> o = MessageBuilder
-                    .withPayload(t)
-                    .setHeader(KafkaHeaders.KEY, new TransactionKey(t.getId()))
+            return MessageBuilder.withPayload(t)
+                    .setHeader(AmqpHeaders.CORRELATION_ID, new TransactionKey(t.getId()))
                     .build();
-            return o;
         };
     }
 }

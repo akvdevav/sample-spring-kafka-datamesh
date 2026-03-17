@@ -17,6 +17,8 @@
     <properties>
         <ksqldb.version>8.1.1</ksqldb.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <spring-boot.version>3.4.3</spring-boot.version>
+        <java.version>21</java.version>
         <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
     </properties>
 
@@ -28,6 +30,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
         <dependency>
             <groupId>io.confluent.ksql</groupId>
